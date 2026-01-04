@@ -1,0 +1,14 @@
+# Java/Maven
+target/
+*.class
+*.jar
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Local Data/Database
+data/
+*.db
+logs/

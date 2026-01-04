@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="LOG_PATTERN">%d{ISO8601} %-5p [%t] [%X{correlationId}] %c{1.} - %m%n</Property>
+    <Property name="APP_LOG_LEVEL">${env:APP_LOG_LEVEL:-INFO}</Property>
+    
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+
+    <RollingFile name="AppFile"
+                 fileName="logs/app.log"
+                 filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy/>
+        <SizeBasedTriggeringPolicy size="10 MB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="14"/>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="com.wex.purchase" level="${APP_LOG_LEVEL}" additivity="false">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="AppFile"/>
+    </Logger>
+
+    <Logger name="org.springframework" level="INFO"/>
+    <Logger name="org.hibernate.SQL" level="WARN"/>
+
+    <Root level="INFO">
+      <AppenderRef ref="Console"/>
+    </Root>
+  </Loggers>
+</Configuration>

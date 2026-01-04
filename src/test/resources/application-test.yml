@@ -1,0 +1,15 @@
+spring:
+  flyway:
+    clean-disabled: false
+    enabled: true
+    baseline-on-migrate: true
+    clean-on-validation-error: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+
+security:
+  public-urls:
+    - /api/v1/auth/**
+    - /h2-console/**

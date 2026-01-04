@@ -1,0 +1,26 @@
+# Core application configuration for Wex Purchase Service
+spring:
+  profiles:
+    active: dev # Default profile; overridden in production/test environments
+
+# Actuator settings for production monitoring and health checks
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+app:
+  external:
+    # Official Treasury API for exchange rate retrieval
+    treasuryBaseUrl: https://api.fiscaldata.treasury.gov
+  jwt:
+    # Note: In a real production environment, these should be provided via environment variables
+    secret: c2VjdXJlLXNlY3JldC1rZXktdGhhdC1pcy1sb25nLWVub3VnaC0zMi1ieXRlcw==
+    ttlMinutes: 60
+
+security:
+  jwt:
+    secret: "c2VjdXJlLXNlY3JldC1rZXktdGhhdC1pcy1sb25nLWVub3VnaC0zMi1ieXRlcw=="
+    ttl-seconds: 1800
+    issuer: "wex-purchase-service"

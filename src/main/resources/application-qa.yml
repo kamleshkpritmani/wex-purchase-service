@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/wex-purchase-db;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+security:
+  public-urls:
+     - /api/v1/auth/**
+     - /v3/api-docs/**
+     - /swagger-ui/**
+     - /swagger-ui.html
+     - /actuator/health
+     - /actuator/info
+  dev-only-public-urls:
+     - /h2-console/**
